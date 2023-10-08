@@ -27,11 +27,11 @@ public class Ticket {
     private String gsm;
 
     @OneToOne
-    @JoinColumn(name = "seat_id")
+    @JoinColumn(name = "seatId")
     private Seat seat;
 
     @ManyToOne
-    @JoinColumn(name = "passenger_id")
+    @JoinColumn(name = "id")
     private Passenger passenger;
 
     public String getPnr() {

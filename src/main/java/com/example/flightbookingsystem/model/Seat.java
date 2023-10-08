@@ -23,7 +23,7 @@ public class Seat {
     private boolean sold = Boolean.FALSE;
     private double price;
     @ManyToOne
-    @JoinColumn(name = "flight_id")
+    @JoinColumn(name = "flightId")
     private Flight flight;
 
     public Integer getSeatId() {
