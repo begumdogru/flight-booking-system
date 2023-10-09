@@ -1,4 +1,6 @@
 package com.example.flightbookingsystem.model;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,7 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "flight")
-public class Flight implements Serializable {
+public class Flight{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer flightId;
@@ -28,8 +30,10 @@ public class Flight implements Serializable {
     private Integer arrivalTime;
     private Integer reservationCode;
     @ManyToMany(mappedBy = "flights")
+    @JsonBackReference
     private List<Passenger> passengers;
     @OneToMany(mappedBy = "flight")
+    @JsonBackReference
     private List<Seat> seats;
 
     public Integer getFlightId() {
