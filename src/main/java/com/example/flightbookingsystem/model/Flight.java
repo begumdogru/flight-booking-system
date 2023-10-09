@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -18,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "flight")
-public class Flight {
+public class Flight implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer flightId;
