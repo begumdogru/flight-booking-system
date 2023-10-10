@@ -1,6 +1,7 @@
 package com.example.flightbookingsystem.service;
 
 import com.example.flightbookingsystem.model.Flight;
+import com.example.flightbookingsystem.model.Seat;
 import com.example.flightbookingsystem.repository.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,6 +52,17 @@ public class FlightService {
         } else {
             // Flight with the given ID not found
             throw new RuntimeException("Flight not found with ID: " + flightId);
+        }
+    }
+    @Transactional
+    public boolean deleteFlightById(Integer flightId) {
+        Optional<Flight> flight = flightRepository.findById(flightId);
+
+        if (flight.isPresent()) {
+            flightRepository.deleteById(flightId);
+            return true;
+        } else {
+            return false;
         }
     }
 }

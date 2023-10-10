@@ -49,4 +49,15 @@ public class FlightController {
         Flight updated = flightService.updateFlight(flightId, updatedFlight);
         return new ResponseEntity<>(updated, HttpStatus.OK);
     }
+    @DeleteMapping("/{flightId}")
+    public ResponseEntity<Void> deleteFlight(@PathVariable Integer flightId) {
+        boolean deleted = flightService.deleteFlightById(flightId);
+
+        if (deleted) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // Return 204 No Content
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Return 404 Not Found
+        }
+    }
+
 }
