@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,7 +32,7 @@ public class Flight{
     @ManyToMany(mappedBy = "flights", cascade = CascadeType.ALL) // Consider using cascade
     @JsonBackReference
     private List<Passenger> passengers;
-    @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL) // Consider using cascade
+    @OneToMany(mappedBy = "flight", fetch = FetchType.EAGER)// Consider using cascade
     @JsonIgnore
     private List<Seat> seats;
 
