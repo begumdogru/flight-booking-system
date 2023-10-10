@@ -1,43 +1,52 @@
 package com.example.flightbookingsystem.controller;
 
-
 import com.example.flightbookingsystem.model.Flight;
-import com.example.flightbookingsystem.repository.FlightRepository;
+import com.example.flightbookingsystem.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/flights")
 public class FlightController {
-    @Autowired
-    FlightRepository flightRepository;
 
-    @GetMapping("/flight")
-    public ResponseEntity<List<Flight>> getAllFlights(@RequestParam(required = false) Integer id) {
-        try {
-            List<Flight> flights = new ArrayList<Flight>();
-            if (id == null) {
-                flightRepository.findAll().forEach(flights::add);
-            } else {
-                flightRepository.findByFlightId(id).forEach(flights::add);
-            }
-            if (flights.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-            return new ResponseEntity<>(flights, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    private final FlightService flightService;
+
+    @Autowired
+    public FlightController(FlightService flightService) {
+        this.flightService = flightService;
     }
 
+    // Get all flights
+    @GetMapping
+    public ResponseEntity<List<Flight>> getAllFlights() {
+        List<Flight> flights = flightService.findAllFlights();
+        return new ResponseEntity<>(flights, HttpStatus.OK);
+    }
+
+    // Get a flight by ID
+    @GetMapping("/{flightId}")
+    public ResponseEntity<Flight> getFlightById(@PathVariable Integer flightId) {
+        Optional<Flight> flight = flightService.findFlightById(flightId);
+        return flight.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    // Create a new flight
+    @PostMapping
+    public ResponseEntity<Flight> createFlight(@RequestBody Flight flight) {
+        Flight savedFlight = flightService.saveFlight(flight);
+        return new ResponseEntity<>(savedFlight, HttpStatus.CREATED);
+    }
+
+    // Update a flight by ID
+    @PutMapping("/{flightId}")
+    public ResponseEntity<Flight> updateFlight(@PathVariable Integer flightId, @RequestBody Flight updatedFlight) {
+        Flight updated = flightService.updateFlight(flightId, updatedFlight);
+        return new ResponseEntity<>(updated, HttpStatus.OK);
+    }
 }
-
-
