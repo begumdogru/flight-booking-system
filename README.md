@@ -23,11 +23,9 @@ To meet the requirements outlined for the Flight Booking System, the following R
 
 ### Payment Service
 * Allow end users to purchase selected seats.
-* Ensure that a seat is not sold to two passengers simultaneously.
-* Implement robust error handling for concurrent seat bookings.
+
 ## Implementation Details
 * This application is designed as a backend service, and no front-end interface is included.
-* The system has been thoroughly tested to ensure reliability and correctness. Test coverage for both integration and unit tests exceeds 80%.
 * A production-grade solution has been provided, adhering to best practices and industry standards.
 
 ## Usage
@@ -46,22 +44,10 @@ To meet the requirements outlined for the Flight Booking System, the following R
     * Use the flight and seat listing endpoint to retrieve information about available flights and seats.
     * Utilize the payment service to complete seat bookings while ensuring concurrent booking protection.
 
-## Run unit tests
-$ ./run_unit_tests.sh
-
-## Run integration tests
-$ ./run_integration_tests.sh
-
-## Deployment
-For deployment instructions and considerations, please refer to the deployment documentation provided in the repository.
-
-## Contributions
-Contributions to this project are welcome! If you would like to contribute, please fork the repository, make your changes, and submit a pull request. Ensure that your contributions align with the project's goals and adhere to best coding practices.
-
 # License
 This project is licensed under the MIT License. Feel free to use, modify, and distribute it as needed, but please acknowledge the original source.
 
-Thank you for choosing the Flight Booking System. We hope this application serves your needs effectively and efficiently. If you encounter any issues or have suggestions for improvement, please don't hesitate to open an issue or reach out to our development team.
+Thank you for choosing the Flight Booking System. I hope this application serves your needs effectively and efficiently. If you encounter any issues or have suggestions for improvement, please don't hesitate to open an issue or reach out to our development team.
 
 Happy booking! ✈️🛫🛬
 
