@@ -84,5 +84,13 @@ public class SeatService {
             return false;
         }
     }
+    public Seat bookSeat(Seat seat) {
+        if (!seat.getBooked()) {
+            seat.setBooked(true);
+            return seatRepository.save(seat);
+        }
+
+        return seat; // The seat is already booked
+    }
 
 }

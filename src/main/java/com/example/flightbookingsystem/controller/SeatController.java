@@ -64,6 +64,16 @@ public class SeatController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Return 404 Not Found
         }
     }
+    @PostMapping("/book/{seatId}")
+    public ResponseEntity<String> bookSeat(@PathVariable Integer seatId) {
+        Optional<Seat> seat = seatService.findSeatById(seatId);
+        if (seat.isPresent()) {
+            Seat bookedSeat = seatService.bookSeat(seat.get());
+            return new ResponseEntity<>("Seat " + bookedSeat.getSeatId() + " has been successfully booked.", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Seat with ID " + seatId + " not found.", HttpStatus.NOT_FOUND);
+        }
+    }
 
 
 }
