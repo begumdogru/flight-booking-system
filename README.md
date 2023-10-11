@@ -28,6 +28,10 @@ To meet the requirements outlined for the Flight Booking System, the following R
 * This application is designed as a backend service, and no front-end interface is included.
 * A production-grade solution has been provided, adhering to best practices and industry standards.
 
+## Swagger UI Documentation
+You can access the Swagger UI documentation to interact with the API. Please use the following link to access the Swagger UI:
+
+[Swagger UI](http://localhost:8082/v2/api-docs)
 ## Usage
 * To use this Flight Booking System, follow these steps:
 
